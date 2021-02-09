@@ -14409,8 +14409,8 @@ $21 \times 345 = 7245$</p>
 </blockquote>
 <p>Notice that the same digits occupy the two-digit number and three-digit number respectively, the only difference is the <em>local</em> ordering of the two-digit number.</p>
 <p>It's pretty obvious that $12 &lt; 21$. So it also stands to reason that that $(12 \times y) &lt; (21 \times y)$ for some constant $y$.</p>
-<p>We can extrapolate this to the three digit number also: $345 &lt; 354 &lt; 435 &lt; 453 &lt; 534 &lt; 543$. Given <code>[3, 4, 5]</code> the smallest product will be a multiplication of 345, and the largest product will be a multiplication of 543.</p>
-<p>So given a number made of the digits <code>[1, 2]</code>, and another number made of the digits <code>[3, 4, 5]</code> then the smallest possible product must be $12 \times 345$, and the largest product from must be $21 \times 543$.</p>
+<p>We can extrapolate this to the three digit number also: $345 &lt; 354 &lt; 435 &lt; 453 &lt; 534 &lt; 543$. Given <code>[3, 4, 5]</code> the smallest product will be a multiple of 345, and the largest product will be a multiple of 543.</p>
+<p>So given a number made of the digits <code>[1, 2]</code>, and another number made of the digits <code>[3, 4, 5]</code> then the smallest possible product must be $12 \times 345$, and the largest product must be $21 \times 543$.</p>
 <p>There is a general rule here:</p>
 <ul>
 <li>For the <strong>smallest</strong> product, the digits in a number must be sorted in <strong>ascending</strong> order, starting from the most significant column.</li>
@@ -14539,7 +14539,7 @@ Largest product is:  52 x 431 = 22412
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>This is much more manageable, but we promised Johnny that we would find a solution that remove the laborious guesswork. So let's take it a step further.</p>
-<h2 id="Beyond-[1,-2,-3,-4,-5]">Beyond <code>[1, 2, 3, 4, 5]</code><a class="anchor-link" href="#Beyond-[1,-2,-3,-4,-5]">&#182;</a></h2><p>We know the answer for digits <code>[1, 2, 3, 4, 5]</code>: 
+<h2 id="Beyond-[1,-2,-3,-4,-5]">Beyond <code>[1, 2, 3, 4, 5]</code><a class="anchor-link" href="#Beyond-[1,-2,-3,-4,-5]">&#182;</a></h2><p>We know the products for digits <code>[1, 2, 3, 4, 5]</code>, these are 
 $13 \times 245$ and $52 \times 431$ for the smallest and largest products respectively.</p>
 <p>Let's try out some other digit combos and see what we get. Maybe there's a pattern in <code>[2, 3, 6, 8, 9]</code> and <code>[1, 6, 7, 8, 9]</code>?</p>
 
@@ -14602,7 +14602,8 @@ Largest product is:  96 x 871 = 83616
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>There is a pattern here. Can you see it?
 It seems to be the case that the same indices are always used to construct the smallest and largest products!</p>
-<p>Look carefully at <code>[2, 3, 6, 8, 9]</code> the smallest product's 2-digit number is 26; the 2-digit number is formed from the first and third digits from the list. For <code>[1, 6, 7, 8, 9]</code> the smallest product's 2-digit number is 17, the 2-digit number is again formed by the first and third digits in the list!</p>
+<p>Look carefully at <code>[2, 3, 6, 8, 9]</code> the smallest product's 2-digit number is 26; formed from the first and third digits from the list.<br>
+For <code>[1, 6, 7, 8, 9]</code> the smallest product's 2-digit number is 17, again formed by the first and third digits in the list!</p>
 <p>The exact same pattern is seen for the largest product, only this time it is the fifth and and second digits.</p>
 <p>We can write this more formally as:</p>
 <p>Given the digits:
@@ -14613,7 +14614,11 @@ d_1d_3 = d_2d_4d_5 = s
 $$<p>and likewise, the the largest product $l$ is:</p>
 $$
 d_5d_2 = d_4d_3d_1 = l
-$$<p>This is another computationaly quick task. So we can go through all possible combinations of digits to prove this theory:</p>
+$$<h3 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h3><ul>
+<li>The smallest product of a 2-digit by 3-digit number in <code>[1, 2, 7, 8, 9]</code> <em>must</em> be $17 \times 289$.</li>
+<li>The largest product of a 2-digit by 3-digit number in <code>[3, 4, 5, 6, 7]</code> <em>must</em> be $74 \times 653$.</li>
+</ul>
+<p>To prove this is another computationaly quick task. So we can go through all possible combinations of digits:</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14699,13 +14704,12 @@ Theorem holds for all possible inputs: True
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Fantastic news!</p>
 <p>So in the end we don't need to do a linear search of this search-space, regardless of the combinations. This can be solved in $O(1)$.</p>
-<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Little Johnny can rejoice, given an ordered list of 5 unique digits between 1 and 9, (e.g., <code>[1, 2, 3, 4, 5]</code>, <code>[2, 3, 7, 8, 9]</code>, etc.) it is <strong>always</strong> the case that the smallest product can be calculated by: $d_1d_3 = d_2d_4d_5$, and the latest product by $d_5d_2 = d_4d_3d_1$.</p>
-<h3 id="Examples">Examples<a class="anchor-link" href="#Examples">&#182;</a></h3><ul>
-<li>The smallest product of a 2-digit by 3-digit number in <code>[1, 2, 7, 8, 9]</code> <em>must</em> be $17 \times 289$.</li>
-<li>The largest product of a 2-digit by 3-digit number in <code>[3, 4, 5, 6, 7]</code> <em>must</em> be $74 \times 653$.</li>
-<li>And 250 more varieties!</li>
-</ul>
-<p>So never fear, Johnny, because if you are faced with such a question again then just remember this ordering rule.</p>
+<h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1><p>Little Johnny can rejoice!</p>
+<p>Given an ordered list of 5 unique digits between 1 and 9, (e.g., <code>[1, 2, 3, 4, 5]</code>, <code>[2, 3, 7, 8, 9]</code>, etc.)<br>
+of the form $\left[d_1, d_2, d_3, d_4, d_5\right]$ then it is <strong>always</strong> the case that the smallest product is of the form:<br>
+$$d_1d_3 \times d_2d_4d_5$$<br>
+and the smallest product is of the form:<br>
+$$d_5d_2 \times d_4d_3d_1$$</p>
 
 </div>
 </div>
