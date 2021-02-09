@@ -14282,10 +14282,10 @@ $21 \times 435 = 9135$<br>
 $34 \times 251 = 8534$</p>
 </blockquote>
 <p>I sympathise; I think if someone used the word "product" around me when I was 9 I'd run for the hills.</p>
-<p>Much like the maligned <a href="https://www.youtube.com/watch?v=9mc7eb1i9o4">New Math</a> of the 60s this is a style of mathematical education that attempts to engage children in lateral thinking. <a href="https://www.youtube.com/watch?v=BpzkefmyQLMB">The many varieties of this problem</a> focus on teaching how to hone in on an answer through soft deduction.</p>
-<p>This is by far my least favourite kind of exercise: a whole lot of guesswork for not much payoff. I find it quite likely that Johnny feels the same way, so it would be nice if there were some rules that could be applied instead of taking stabs in the dark.</p>
+<p>Much like the maligned <a href="https://www.youtube.com/watch?v=9mc7eb1i9o4">New Math</a> of the 60s, this is a style of mathematical education that attempts to engage children in lateral thinking. <a href="https://www.youtube.com/watch?v=BpzkefmyQLMB">The many varieties of this problem</a> focus on teaching how to hone in on an answer through soft deduction.</p>
+<p>This is by far my least favourite kind of exercise; it's a whole lot of guesswork for not much payoff. I find it quite likely that Johnny feels the same way, so it would be nice if there were some rules that could be applied instead of taking stabs in the dark.</p>
 <p>Well, there <em>are</em>. These take the guesswork out entirely, regardless of the five unique digits chosen.
-I will demonstrate how, but first let's figure out what the answer is to this question.</p>
+I will demonstrate how, but first let's answer this question the guessing-way.</p>
 <h2 id="Naive-solution">Naive solution<a class="anchor-link" href="#Naive-solution">&#182;</a></h2><p>There are 120 total permutations in this question. Poor Johnny better sharpen his pencils!</p>
 <p>The reason we can say there are 120 permutations is because at the core we're asking in how many ways can <code>[1, 2, 3, 4, 5]</code> be rearranged
 without duplication, which is $5!$ (5 factorial).</p>
@@ -14302,22 +14302,22 @@ $$
 34 \times 251  \\
 \dots
 $$<p>So if there are 120 permutations of <code>[1, 2, 3, 4, 5]</code> then there must be 120 permutations of the multiplication expression.</p>
-<p>A terrible toll on Johnny, but computers don't complain. So let's use brute-force to find the largest/smallest permutations.</p>
+<p>A terrible toll on Johnny, but computers don't complain. Let's use brute-force to find the largest/smallest permutations.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 
 
-<span class="k">def</span> <span class="nf">to_product_triple_2_3</span><span class="p">(</span><span class="n">a_t</span><span class="p">,</span> <span class="n">a_u</span><span class="p">,</span> <span class="n">b_h</span><span class="p">,</span> <span class="n">b_t</span><span class="p">,</span> <span class="n">b_u</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">to_product_triple</span><span class="p">(</span><span class="n">a_t</span><span class="p">,</span> <span class="n">a_u</span><span class="p">,</span> <span class="n">b_h</span><span class="p">,</span> <span class="n">b_t</span><span class="p">,</span> <span class="n">b_u</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Given: a_t, a_u, b_h, b_t, b_u, we combine the a and b</span>
+<span class="sd">    Given digits a_t, a_u, b_h, b_t, b_u, we combine the a and b</span>
 <span class="sd">    parts into a 2-digit and 3-digit number respectively,</span>
 <span class="sd">    returning the resultant numbers and their product as a</span>
 <span class="sd">    tuple `(aa, bbb, aa * bbb)`.</span>
@@ -14347,7 +14347,7 @@ $$<p>So if there are 120 permutations of <code>[1, 2, 3, 4, 5]</code> then there
 
 <span class="c1"># Generate the list of all possible products.</span>
 <span class="n">perms</span> <span class="o">=</span> <span class="n">permutations</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_product_triple_2_3</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perms</span><span class="p">]</span>
+<span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_product_triple</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perms</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of permutations:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">))</span>
 
 
@@ -14416,7 +14416,7 @@ $21 \times 345 = 7245$</p>
 <li>For the <strong>smallest</strong> product, the digits in a number must be sorted in <strong>ascending</strong> order, starting from the most significant column.</li>
 <li>For the <strong>largest</strong> product, the digits in a number must be sorted in <strong>descending</strong> order, starting from the most significant column.</li>
 </ul>
-<h3 id="Calculating-combinations">Calculating combinations<a class="anchor-link" href="#Calculating-combinations">&#182;</a></h3><p>How does this help us? It lets us discard a significant number of permutations; the order in which the digits are arranged must conform to the above rules.</p>
+<h3 id="Calculating-combinations">Calculating combinations<a class="anchor-link" href="#Calculating-combinations">&#182;</a></h3><p>How does this help us? It lets us discard a significant number of permutations, because the order in which the digits are arranged must conform to the above rules.</p>
 <p>To demonstrate this, consider the following:</p>
 <blockquote><p>Imagine you have 5 ping-pong balls labelled with the numbers 1-5 placed in a bag. 
 If you then draw two balls at random from the bag these will form your 2-digit number.
@@ -14436,14 +14436,15 @@ The remaining 3 balls in the bag will form your 3-digit number.</p>
 <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 </pre></div>
 <p>10 possible combinations.</p>
-<p>Bear in mind we have already seen that there is only one way that each combination can be arranged to give the smallest possible product (sort the digits in ascending order); and there is only one way in which each product can produce largest possible solution (sort the digits in descending order). This means that in total there are only 20 permutations that we need to focus on: 10 for the smallest product, and 10 for the largest.</p>
+<p>Bear in mind: there is only one way to arrange each combination to give the smallest possible product (sort the digits in ascending order); likewise there is only one way to arrange each combination to give the largest possible product (sort the digits in descending order).</p>
+<p>Thus, there are 20 permutations that we need to focus on: 10 for the smallest product, and 10 for the largest.</p>
 <p>Instead of calculating all the products by hand, let's have Python do this bit for us.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
@@ -14451,7 +14452,7 @@ The remaining 3 balls in the bag will form your 3-digit number.</p>
 <span class="n">digit_list_12345</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">get_smallest_largest_perms_2_3</span><span class="p">(</span><span class="n">digit_list</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_smallest_largest_perms</span><span class="p">(</span><span class="n">digit_list</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    From an ordered list of 5 digits, returns the lists of smallest and largest</span>
 <span class="sd">    products in a tuple of the form: (smallest_list, largest_list).</span>
@@ -14469,7 +14470,7 @@ The remaining 3 balls in the bag will form your 3-digit number.</p>
     <span class="c1"># Note: the number digits are already sorted in ascending order as</span>
     <span class="c1"># `combinations` guarantees ordering is preserved.</span>
     <span class="n">smallest_list</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">to_product_triple_2_3</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">to_product_triple</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">y</span><span class="p">)</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">two_digits_list</span><span class="p">,</span> <span class="n">three_digits_list</span><span class="p">)]</span>
 
     <span class="c1"># Calculate the largest possible products from the combination of the</span>
@@ -14477,22 +14478,22 @@ The remaining 3 balls in the bag will form your 3-digit number.</p>
     <span class="c1"># Note: we reverse the digit order of the 2-digits and 3-digit numbers to</span>
     <span class="c1"># achieve this.</span>
     <span class="n">largest_list</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">to_product_triple_2_3</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">[::</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-                              <span class="o">*</span><span class="n">y</span><span class="p">[::</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">to_product_triple</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">[::</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                          <span class="o">*</span><span class="n">y</span><span class="p">[::</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">for</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">two_digits_list</span><span class="p">,</span> <span class="n">three_digits_list</span><span class="p">)]</span>
 
     <span class="k">return</span> <span class="n">smallest_list</span><span class="p">,</span> <span class="n">largest_list</span>
 
 
-<span class="n">smallest_list</span><span class="p">,</span> <span class="n">largest_list</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms_2_3</span><span class="p">(</span><span class="n">digit_list_12345</span><span class="p">)</span>
+<span class="n">small_list</span><span class="p">,</span> <span class="n">large_list</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms</span><span class="p">(</span><span class="n">digit_list_12345</span><span class="p">)</span>
 
 <span class="c1"># Show our calculations.</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:20}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Smallest products&quot;</span><span class="p">,</span> <span class="s2">&quot;Largest products&quot;</span><span class="p">))</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">smallest_list</span><span class="p">,</span> <span class="n">largest_list</span><span class="p">):</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">small_list</span><span class="p">,</span> <span class="n">large_list</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:20}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fmt_perm</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">fmt_perm</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=====================================&quot;</span><span class="p">)</span>
-<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">smallest_list</span><span class="p">)</span>
-<span class="n">print_largest_product</span><span class="p">(</span><span class="n">largest_list</span><span class="p">)</span>
+<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">small_list</span><span class="p">)</span>
+<span class="n">print_largest_product</span><span class="p">(</span><span class="n">large_list</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14540,28 +14541,28 @@ Largest product is:  52 x 431 = 22412
 <p>This is much more manageable, but we promised Johnny that we would find a solution that remove the laborious guesswork. So let's take it a step further.</p>
 <h2 id="Beyond-[1,-2,-3,-4,-5]">Beyond <code>[1, 2, 3, 4, 5]</code><a class="anchor-link" href="#Beyond-[1,-2,-3,-4,-5]">&#182;</a></h2><p>We know the answer for digits <code>[1, 2, 3, 4, 5]</code>: 
 $13 \times 245$ and $52 \times 431$ for the smallest and largest products respectively.</p>
-<p>Let's try out some other digit combos and see what we get. Maybe there's a pattern in <code>[2, 3, 6, 8, 9]</code> and <code>[1, 6, 7, 8, 9]</code>.</p>
+<p>Let's try out some other digit combos and see what we get. Maybe there's a pattern in <code>[2, 3, 6, 8, 9]</code> and <code>[1, 6, 7, 8, 9]</code>?</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">digit_list_23689</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<span class="n">smalls_23689</span><span class="p">,</span> <span class="n">l_23689</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms_2_3</span><span class="p">(</span><span class="n">digit_list_23689</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For list:&quot;</span><span class="p">,</span> <span class="n">digit_list_23689</span><span class="p">)</span>
-<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">smallest_23689</span><span class="p">)</span>
-<span class="n">print_largest_product</span><span class="p">(</span><span class="n">largest_23689</span><span class="p">)</span>
+<span class="n">s_23689</span><span class="p">,</span> <span class="n">l_23689</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms</span><span class="p">(</span><span class="n">digit_list_23689</span><span class="p">)</span>
+<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">s_23689</span><span class="p">)</span>
+<span class="n">print_largest_product</span><span class="p">(</span><span class="n">l_23689</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <span class="n">digit_list_16789</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<span class="n">smallest_16789</span><span class="p">,</span> <span class="n">largest_16789</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms_2_3</span><span class="p">(</span><span class="n">digit_list_16789</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For list:&quot;</span><span class="p">,</span> <span class="n">digit_list_16789</span><span class="p">)</span>
-<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">smallest_16789</span><span class="p">)</span>
-<span class="n">print_largest_product</span><span class="p">(</span><span class="n">largest_16789</span><span class="p">)</span>
+<span class="n">s_16789</span><span class="p">,</span> <span class="n">l_16789</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms</span><span class="p">(</span><span class="n">digit_list_16789</span><span class="p">)</span>
+<span class="n">print_smallest_product</span><span class="p">(</span><span class="n">s_16789</span><span class="p">)</span>
+<span class="n">print_largest_product</span><span class="p">(</span><span class="n">l_16789</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14618,25 +14619,25 @@ $$<p>This is another computationaly quick task. So we can go through all possibl
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calculated_smallest_product_2_3</span><span class="p">(</span><span class="n">li</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calculated_smallest_product</span><span class="p">(</span><span class="n">li</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an ordered list of 5 digits, return the smallest product of the</span>
 <span class="sd">    calculation aa * bbb.</span>
 <span class="sd">    Return value is a tuple of (aa, bbb, aa * bbb)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">to_product_triple_2_3</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">to_product_triple</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">calculated_largest_product_2_3</span><span class="p">(</span><span class="n">li</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calculated_largest_product</span><span class="p">(</span><span class="n">li</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given an ordered list of 5 digits, returns the largest product of the </span>
 <span class="sd">    calculation aa * bbb.</span>
 <span class="sd">    Return value is a tuple of (aa, bbb, aa * bbb)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">to_product_triple_2_3</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">to_product_triple</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 
 <span class="k">def</span> <span class="nf">test_permutations_combo</span><span class="p">(</span><span class="n">digit_list</span><span class="p">):</span>
@@ -14646,13 +14647,13 @@ $$<p>This is another computationaly quick task. So we can go through all possibl
 <span class="sd">    `calculated_smallest_product` and `calculated_largest_product` </span>
 <span class="sd">    produce the correct output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">smallest_list</span><span class="p">,</span> <span class="n">largest_list</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms_2_3</span><span class="p">(</span><span class="n">digit_list</span><span class="p">)</span>
+    <span class="n">smallest_list</span><span class="p">,</span> <span class="n">largest_list</span> <span class="o">=</span> <span class="n">get_smallest_largest_perms</span><span class="p">(</span><span class="n">digit_list</span><span class="p">)</span>
 
-    <span class="n">smallest_match</span> <span class="o">=</span> <span class="n">calculated_smallest_product_2_3</span><span class="p">(</span>
-        <span class="n">digit_list</span><span class="p">)</span> <span class="o">==</span> <span class="n">find_smallest_product</span><span class="p">(</span><span class="n">smallest_list</span><span class="p">)</span>
+    <span class="n">smallest_match</span> <span class="o">=</span> <span class="n">calculated_smallest_product</span><span class="p">(</span><span class="n">digit_list</span><span class="p">)</span> <span class="o">==</span> \
+                     <span class="n">find_smallest_product</span><span class="p">(</span><span class="n">smallest_list</span><span class="p">)</span>
     
-    <span class="n">largest_match</span> <span class="o">=</span> <span class="n">calculated_largest_product_2_3</span><span class="p">(</span>
-        <span class="n">digit_list</span><span class="p">)</span> <span class="o">==</span> <span class="n">find_largest_product</span><span class="p">(</span><span class="n">largest_list</span><span class="p">)</span>
+    <span class="n">largest_match</span> <span class="o">=</span> <span class="n">calculated_largest_product</span><span class="p">(</span><span class="n">digit_list</span><span class="p">)</span> <span class="o">==</span> \
+                    <span class="n">find_largest_product</span><span class="p">(</span><span class="n">largest_list</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">smallest_match</span> <span class="ow">and</span> <span class="n">largest_match</span>
 
